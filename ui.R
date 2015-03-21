@@ -38,7 +38,7 @@ shinyUI(fluidPage(
     mainPanel(
       h4('EDA Scatter Plot'),
       ggvisOutput("plot"),
-      h4('k-means plot'),
+      h4('K-means Clustering Plot'),
       ggvisOutput('plot_cluster')
     )
   )
