@@ -19,10 +19,18 @@ shinyServer(function(input, output) {
    carriers <- input$carrier
    
    # Filter flighs data by unser inputs
-    flights %>% 
+   flights %>% 
      filter( carrier %in% ifelse(!is.na(carriers), carriers , flights$carrier)) %>%
      filter( arr_delay >= arr_delay_range_low & arr_delay <= arr_delay_range_high) %>%
      filter( dep_delay >= dep_delay_range_low & dep_delay <= dep_delay_range_high) 
+  })
+  
+  kmeansData <- reactive({
+    filtered <- flightsFiltered()
+    kmdata <- filtered %>% select(arr_delay, dep_delay)
+    clustered <- kmeans(kmdata, input$clusters)
+    kmdata$cluster <- clustered$cluster
+    kmdata
   })
 
   # render scatter plot
@@ -36,5 +44,11 @@ shinyServer(function(input, output) {
     add_legend("fill", title = "Carrier",orient = "right") %>%
     add_legend("size", title = "Distance",orient = "left") %>%
     bind_shiny("plot","plot_ui")
- 
+
+  kmeansData %>% ggvis(x = ~arr_delay, y = ~ dep_delay) %>% group_by(cluster) %>%
+    layer_paths(stroke = ~cluster, strokeWidth := 1) %>%
+    layer_points(x = ~arr_delay, y= ~dep_delay, size := 15, fill= ~cluster) %>%
+    add_axis("x", title = "Arrival Delay in minutes") %>%
+    add_axis("y", title = "Departure Delay in minutes") %>%
+    bind_shiny("plot_cluster","plot_ui_cluster")
 })

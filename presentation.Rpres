@@ -1,0 +1,36 @@
+A shiny application for Exploratory Data Analysis
+========================================================
+author: hidekoji
+date: 
+
+
+========================================================
+nycflights13 data
+
+So this shiny application allows you to peform Exploratory Data Analyis against nycflights13 data.
+nycflights13 contains Airline on-time data for all flights departing NYC in 2013. 
+
+```{r}
+library("nycflights13")
+head(flights)
+```
+
+Arrival Delay vs Departure Delay
+========================================================
+By grancing the data, I'm just curious how the relationship between Arrival Delay and Departure Delay looks like, so I want to show the scatter plot like this in my shiny app
+
+```{r load_packages, include=FALSE}
+library(ggplot2)
+```
+
+```{r, echo=FALSE}
+filtered <- subset(flights,(carrier == "AA" | carrier == "UA") & arr_delay >= 100 & arr_delay <= 500 & dep_delay >= 100 & dep_delay <= 500) 
+
+    ggplot(data = filtered, aes(arr_delay, dep_delay)) +
+    geom_point(aes(colour = factor(carrier), size = distance)) 
+```
+
+Make the scatter plot dynamic
+========================================================
+Since the data contains
+
