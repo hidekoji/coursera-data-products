@@ -27,24 +27,22 @@ library("nycflights13");head(flights[ c('dep_time','dep_delay', 'arr_time', 'arr
 
 Arrival Delay vs Departure Delay
 ========================================================
-By glancing the data, I'm just curious how the relationship between Arrival Delay and Departure Delay looks like, so I want to show the scatter plot like this in my shiny app to do Exploratory Data Analysis(EDA).
+By glancing the data, I'm just curious how the relationship between Arrival Delay and Departure Delay looks like, so I want to show the scatter plot like this in my shiny app to do Exploratory Data Analysis(EDA). (NOTE:It looks like Rpres does not support ggvis output so used ggplot in this slide. The plot's look and feel are different from actual shinny app)
 
 
 
 ![plot of chunk unnamed-chunk-2](presentation-figure/unnamed-chunk-2-1.png) 
 
-(NOTE:It looks like Rpres does not support ggvis output so used ggplot int this slide so the plot look and feel is different from actual shinny app)
 
 Make the scatter plot dynamic
 ========================================================
 Since the data set contains lots of data (336776 rows), you might want to filter data by delay time and carrier, so add these as Shiny UI widget
-<img src="./uiInputs.tiff" />
+
+<img src="https://farm8.staticflickr.com/7610/16692296918_908ec7cba7_b.jpg" />
 
 K-means Clustering Plot
 ========================================================
-On top of the EDA, I'm also curious if these data can be clustered with K-means. So I added another plot to show this.
+On top of the EDA, I'm also curious if these data can be clustered with K-means. So I added another plot to show this.(NOTE:It looks like Rpres does not support ggvis output so used ggplot in this slide. The plot's look and feel are different from actual shinny app)
 
 
 ![plot of chunk unnamed-chunk-3](presentation-figure/unnamed-chunk-3-1.png) 
-
-(NOTE:It looks like Rpres does not support ggvis output so used ggplot int this slide so the plot look and feel is different from actual shinny app)
